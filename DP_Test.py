@@ -1,32 +1,25 @@
 
-n = int(input())
-m = int(input())
-cx = int(input())
-cy = int(input())
+v = [[3], [1, 2], [6, 2, 3], [3, 5, 4, 1]]
+m = []
 
-mark_array = [[0 for col in range(m+1)] for raw in range(n+1)]
+n = 4
 
-x = [1,1,2,2,-1,-1,-2,-2]
-y = [2,-2,1,-1,2,-2,1,-1]
+for i in range(1, n+1):
+    m.append([0] * n)
 
-mark_array[cx][cy] = 1
-for i in range(8):
-    tx = cx + x[i]
-    ty = cy + y[i]
-    if 0 <= tx <= n and 0 <= ty <= m:
-        mark_array[tx][ty] = 1
+print(v)
+print(m)
 
-result_array = [[0 for col in range(m+1)] for raw in range(n+1)]
-result_array[0][0] = 1
-for i in range(n+1):
-    for j in range(m+1):
-        if i:
-            if not mark_array[i][j]:
-                result_array[i][j] += result_array[i-1][j]
-        if j:
-            if not mark_array[i][j]:
-                result_array[i][j] += result_array[i][j-1]
+for i in range(0, n):
+    for j in range(0, i+1):
+        print('i: ' + str(i) + ', j: ' + str(j))
+        if i == 0:
+            m[0][0] = v[i][j]
+        elif j == 0:
+            m[i][0] = v[i][j] + m[i - 1][0]
+        else:
+            m[i][j] = v[i][j] + max(m[i - 1][j - 1], m[i - 1][j])
+        print(m)
 
-print(result_array[n][m])
-print(mark_array)
-print(result_array)
+
+print(max(m[n - 1]))
