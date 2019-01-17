@@ -40,9 +40,9 @@ def get_height(node):
         return max(get_height(node.left), get_height(node.right)) + 1
 
 
-def add_padding(str, pad_length_value):
-    str = str.strip()
-    return str.center(pad_length_value, ' ')
+def add_padding(padding_str, pad_len_value):
+    padding_str = padding_str.strip()
+    return padding_str.center(pad_len_value, ' ')
 
 
 # Store node , space and slashes in list first, then print out
