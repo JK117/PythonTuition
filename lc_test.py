@@ -1,32 +1,47 @@
-nums = [1, 0, -1, 0, -2, 2]
-target = 0
+nums_list = [1, 0, -1, 0, -2, 2]
+target_num = 0
 
 
-def four_sum(num_list, target_num):
+def four_sum(nums, target):
     """
-    :type num_list: List[int]
-    :type target_num: int
+    :type nums: List[int]
+    :type target: int
     :rtype: List[List[int]]
     """
-    _len,_dict,ans = len(num_list), {}, set()
-    num_list.sort()
-    if len(num_list) < 4 or 4*num_list[0] > target_num or 4*num_list[_len - 1] < target_num:
+    num_len = len(nums)
+    buff_dict = {}
+    ans = set()
+    nums.sort()
+
+    # border conditions
+    if len(nums) < 4 or 4 * nums[0] > target or 4 * nums[num_len - 1] < target:
         return []
-    for i in range(_len):
-        for j in range(i + 1,_len):
-            _sum = num_list[i] + num_list[j]
-            if _sum not in _dict:
-                _dict[_sum] = [(i,j)]
+
+    # sum of every 2-element pair
+    for i in range(num_len):
+        for j in range(i + 1, num_len):
+            _sum = nums[i] + nums[j]
+            if _sum not in buff_dict:
+                buff_dict[_sum] = [[i, j]]
             else:
-                _dict[_sum].append((i,j))
-    for i in range(_len):
-        for j in range(i + 1,_len):
-            _cha = target_num - (num_list[i] + num_list[j])
-            if _cha in _dict:
-                for k in _dict[_cha]:
+                buff_dict[_sum].append([i, j])
+    # print(buff_dict)
+
+    for i in range(num_len):
+        for j in range(i + 1, num_len):
+            _cha = target - (nums[i] + nums[j])
+            if _cha in buff_dict:
+                for k in buff_dict[_cha]:
                     if k[0] > j:
-                        ans.add((num_list[i], num_list[j], num_list[k[0]], num_list[k[1]]))
+                        ans.add((nums[i], nums[j], nums[k[0]], nums[k[1]]))
     return list(ans)
 
 
-four_sum(nums, target)
+# print(four_sum(nums_list, target_num))
+
+
+print(nums_list)
+nums_set = set(nums_list)
+print(nums_set)
+_nums_list = list(nums_set)
+print(_nums_list)
