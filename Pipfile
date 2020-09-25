@@ -6,8 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-pillow = "==6.2.0"
-numpy = "==1.17.2"
+pillow = "*"
+numpy = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
